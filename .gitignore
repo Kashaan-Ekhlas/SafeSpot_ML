@@ -10,10 +10,14 @@ venv/
 datasets/
 preprocessing/
 processed/
+training/
 *.csv
 *.jsonl
 
 # Environment variables
 .env
+
+# models
+models/
 
 test.rest
