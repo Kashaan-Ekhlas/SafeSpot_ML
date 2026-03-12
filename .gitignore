@@ -8,6 +8,8 @@ venv/
 
 # ML / Data
 data/
+data
+*.txt
 datasets/
 processed/
 *.csv
