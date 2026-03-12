@@ -7,10 +7,9 @@ __pycache__/
 venv/
 
 # ML / Data
+data/
 datasets/
-preprocessing/
 processed/
-training/
 *.csv
 *.jsonl
 
