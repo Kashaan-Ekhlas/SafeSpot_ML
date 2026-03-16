@@ -19,11 +19,8 @@ LABEL_NAMES = ["S1_harassment", "S2_hate", "S3_violence", "S4_sexual", "S8_safe"
 
 print("device:", DEVICE)
 
-# Use test split — val was seen during training, test is truly held out
 dataset = load_dataset("json", data_files={"test": "../processed/test.jsonl"})
-
 tokenizer = AutoTokenizer.from_pretrained("../models/deberta_lora/full_model")
-
 def tokenize(batch):
     return tokenizer(
         batch["text"],
@@ -31,7 +28,6 @@ def tokenize(batch):
         truncation=True,
         max_length=256
     )
-
 dataset = dataset.map(tokenize, batched=True)
 dataset.set_format(type="torch", columns=["input_ids", "attention_mask", "labels"])
 test_dataset = dataset["test"]
@@ -52,7 +48,7 @@ with torch.no_grad():
 
         logits = model(input_ids=input_ids, attention_mask=attention_mask).logits
         probs  = torch.sigmoid(logits)
-        preds  = (probs > 0.5).int().cpu().numpy()
+        preds = (probs > 0.6).int().cpu().numpy()   
 
         all_preds.append(preds)
         all_labels.append(labels)

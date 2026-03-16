@@ -33,8 +33,8 @@ while True:
     for label, prob in zip(LABEL_NAMES, probs):
         print(f"  {label:<20} {prob:.4f}")
 
-    predicted = [label for label, prob in zip(LABEL_NAMES, probs) if prob > 0.5]
-    print("\nPredicted labels (threshold=0.5):")
+    predicted = [label for label, prob in zip(LABEL_NAMES, probs) if prob > 0.6]
+    print("\nPredicted labels (threshold=0.6):")
     for label in predicted:
         print(f"  ✓ {label}")
     if not predicted:

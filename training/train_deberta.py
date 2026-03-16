@@ -85,7 +85,6 @@ def compute_metrics(eval_pred):
     precision = precision_score(labels, preds, average="macro", zero_division=0)
     recall    = recall_score(labels, preds, average="macro", zero_division=0)
 
-    # Per-label F1 so you can see which labels are struggling each epoch
     per_label_f1 = f1_score(labels, preds, average=None, zero_division=0)
     per_label_metrics = {
         f"f1_{name}": float(per_label_f1[i])

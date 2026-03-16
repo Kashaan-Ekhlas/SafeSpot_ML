@@ -9,14 +9,12 @@ POLICIES = [
     "S4_sexual",
     "S8_safe",
 ]
-NUM_LABELS = 5
-
+NUM_LABELS = 5 # used to be more but i had to drop due to lack of data :()
 
 def clean_text(text: str) -> str:
     if not isinstance(text, str):
         return ""
     return text.strip()
-
 
 def print_label_distribution(df: pd.DataFrame, split_name: str):
     print(f"\n--- {split_name} ({len(df)} total rows) ---")
@@ -57,10 +55,6 @@ def load_hatespeech(path: Path) -> list[dict]:
 
 
 def load_ucberkeley() -> list[dict]:
-    # Raw rows (no averaging) — dedup by text to prevent train/val leakage
-    # from the same comment appearing across splits.
-    # First row per unique text is kept, preserving original annotator scores.
-    # Thresholds match your original SQL: hatespeech > 1, violence > 2
     print("Loading ucberkeley-dlab/measuring-hate-speech...")
     df = load_dataset("ucberkeley-dlab/measuring-hate-speech")["train"].to_pandas()
     print(f"  Raw rows: {len(df)}")
@@ -87,9 +81,7 @@ def load_ucberkeley() -> list[dict]:
 
 def load_civil_comments() -> list[dict]:
     # Taking sexual_explicit, obscene -> S4
-    #         identity_attack          -> S2 (hate supplement)
-    #         threat                   -> S3 (violence supplement)
-    # No comment_id column, dedup by text
+    # identity_attack -> S2 (hate supplement)
     print("Loading google/civil_comments...")
     df = load_dataset("google/civil_comments")["train"].to_pandas()
     print(f"  Total rows: {len(df)}")
