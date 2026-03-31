@@ -9,7 +9,7 @@ POLICIES = [
     "S4_sexual",
     "S8_safe",
 ]
-NUM_LABELS = 5 # used to be more but i had to drop due to lack of data :()
+NUM_LABELS = 5 # used to be more but i had to drop due to lack of data :(
 
 def clean_text(text: str) -> str:
     if not isinstance(text, str):

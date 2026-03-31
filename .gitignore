@@ -14,11 +14,14 @@ datasets/
 processed/
 *.csv
 *.jsonl
+graphs!/
+run_model.py
 
 # Environment variables
 .env
 
 # models
 models/
+model_dir
 
 test.rest
